@@ -1,0 +1,84 @@
+client:
+  name_line1: "TECNOLOGÍA"
+  name_line2: "TÉRMICA SA"
+  nif: "A28592772"
+  lines: 25
+  type: "Cliente Nuevo"
+
+proposal:
+  date: "Marzo 2026"
+  duration_months: "36 meses"
+  network_type: "Red 5G Vodafone"
+  include_holidaysim: true
+  include_lynks_tic: true
+  include_roaming: false
+
+products:
+  - name_line1: "BUNDLE RED"
+    name_line2: "INFINITY PRO"
+    price_monthly: "73,44€/mes"
+    price_before: "112,98€/mes"
+    discount_text: "35% de descuento"
+    features:
+      - "Datos ilimitados Full Speed"
+      - "5G en toda la red Vodafone"
+      - "Roaming incluido en UE"
+
+  - name_line1: "FIBRA"
+    name_line2: "1 GBPS"
+    price_monthly: "0€/mes"
+    price_before: "34,85€/mes"
+    discount_text: "100% de descuento"
+    features:
+      - "Conexión simétrica 1 Gbps"
+      - "Incluida sin coste adicional"
+      - "Instalación y mantenimiento"
+
+  - name_line1: "CENTRALITA"
+    name_line2: "PLUS"
+    price_monthly: "0€/mes"
+    price_before: "30,75€/mes"
+    discount_text: "100% de descuento"
+    features:
+      - "Gestión avanzada de llamadas"
+      - "Incluida sin coste adicional"
+      - "Multi-sede y extensiones"
+
+economic:
+  total_monthly: "305,79 €/mes"
+  subsidy_vodafone: "-160,82€"
+  subsidy_plan_negocio: "-956,18€"
+  apoyo_economico: "1.800€"
+  summary_line: "25 líneas · Terminales a 0€ · Todos con 35% dto · Compromiso 36 meses"
+  subsidy_detail_line: "Sub. Vodafone: -160,82€  ·  Sub. Plan Negocio: -956,18€  ·  Apoyo Económico: 1.800€"
+
+terminals:
+  - model: "Adoc NEO 8000 4G"
+    price: "0,00 €"
+    specs:
+      pantalla: '6,56" IPS 90Hz HD+'
+      procesador: "MT6761 4G · 4GB RAM"
+      almacenamiento: "64GB + microSD"
+      camara: "13MP + 5MP frontal"
+      bateria: "5000mAh · carga 10W"
+      conectividad: "4G · Wi-Fi 5 · BT · NFC"
+
+  - model: "Adoc NEO 3850W 4G"
+    price: "0,00 €"
+    specs:
+      pantalla: '6,6" IPS 90Hz FHD+'
+      procesador: "MT6769 · 4GB RAM"
+      almacenamiento: "128GB + microSD"
+      camara: "50MP + 5MP frontal"
+      bateria: "5700mAh · carga rápida"
+      conectividad: "4G · Wi-Fi 5 · BT 5.0 · NFC"
+
+  - model: "Cocomm DT250 4G Solo Voz"
+    price: "0,00 €"
+    specs:
+      pantalla: '2,4" TFT · Diseño básico'
+      procesador: "MT6261 · 128MB RAM"
+      almacenamiento: "256MB + microSD 32GB"
+      camara: "Sin cámara"
+      bateria: "1500mAh · larga duración"
+      conectividad: "4G · BT 3.0"

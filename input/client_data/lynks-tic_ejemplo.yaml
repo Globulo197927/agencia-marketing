@@ -1,0 +1,35 @@
+client:
+  name_short: "DIAVERUM"
+  name_suffix: "SERVICIOS RENALES SL"
+  nif: "B84991736"
+  sedes: 55
+  service_type: "Conectividad FTTO + Voz IP"
+
+proposal:
+  date: "Marzo 2026"
+  extensiones: 165
+  canales: 165
+  ddi_unit_price: "1,50€/mes"
+  terminal_model: "Yealink W73P"
+  terminal_unit_price: "8,50€/ud/mes"
+
+options:
+  - name: "OPCIÓN A"
+    speed: "1Gbps/1Gbps simétrico"
+    speed_download: "1.000 Mbps"
+    speed_upload: "1.000 Mbps"
+    total_price: "3.795 €/mes"
+    ftto_unit_price: "42,00€/mes"
+    ftto_total: "2.310€"
+    title: "OPCIÓN A — FTTO 1 GBPS · LA MÁS POTENTE"
+
+  - name: "OPCIÓN B"
+    speed: "600Mbps/600Mbps simétrico"
+    speed_download: "600 Mbps"
+    speed_upload: "600 Mbps"
+    total_price: "3.575 €/mes"
+    ftto_unit_price: "38,00€/mes"
+    ftto_total: "2.090€"
+    title: "OPCIÓN B — FTTO 600 MBPS · LA MÁS EQUILIBRADA"
+
+savings_line: "↓ Ahorro de 2.640€/año respecto a Opción A"

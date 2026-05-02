@@ -1,0 +1,11 @@
+# Datos extraídos automáticamente del CRM
+# Revisa y ajusta los valores antes de generar la presentación
+
+client:
+  name_line1: "HERBOLARIO DOEMI"
+  name_line2: "SL"
+
+products:
+
+proposal:
+  date: "Mayo 2026"

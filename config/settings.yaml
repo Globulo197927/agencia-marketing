@@ -1,0 +1,8 @@
+defaults:
+  output_dir: "output"
+  venv: ".venv"
+  tesseract_lang: "spa"
+
+brand_configs:
+  vodafone: "config/vodafone.yaml"
+  lynks-tic: "config/lynks-tic.yaml"

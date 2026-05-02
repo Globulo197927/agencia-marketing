@@ -1,0 +1,204 @@
+brand:
+  name: "Vodafone"
+  primary_color: "E60000"
+  secondary_color: "111111"
+  accent_color: "FFFFFF"
+  footer_text: "Grupo Enertel · Distribuidor Platinum Vodafone Empresas · info@grupoenertel.com · 942-30-40-45"
+  template: "templates/vodafone_base.pptx"
+  roaming_template: "templates/vodafone_roaming_addon.pptx"
+
+defaults:
+  permanencia: "36 meses"
+  tipo_red: "Red 5G Vodafone"
+  tipo_cliente: "Cliente Nuevo"
+  fecha: "Abril 2026"
+
+slides:
+  include_holidaysim: true
+  include_lynks_tic: true
+  include_roaming: false
+
+fields:
+  slide_1:
+    client_name_line1:
+      path: "/slide[1]/shape[@id=6]"
+      type: "text"
+      find: "TECNOLOGÍA"
+    client_name_line2:
+      path: "/slide[1]/shape[@id=7]"
+      type: "text"
+      find: "TÉRMICA SA"
+    nif:
+      path: "/slide[1]/shape[@id=9]"
+      type: "text"
+      find: "NIF A28592772"
+    network_badge:
+      path: "/slide[1]/shape[@id=10]"
+      type: "text"
+      find: "● Red 5G Vodafone"
+    feature_bullets:
+      path: "/slide[1]/shape[@id=12]"
+      type: "multiline_text"
+      find: "▸  25 líneas móviles · Plan RED Infinity PRO"
+    date:
+      path: "/slide[1]/shape[@id=13]"
+      type: "text"
+      find: "Marzo 2026"
+
+  slide_2:
+    client_name_reference:
+      path: "/slide[2]/shape[@id=28]"
+      type: "text"
+      find: "TECNOLOGÍA TÉRMICA SA"
+
+  slide_5:
+    summary_info:
+      path: "/slide[5]/shape[@id=4]"
+      type: "text"
+      find: "Servicios base para TECNOLOGÍA TÉRMICA SA · 25 líneas · Cliente Nuevo · Compromiso 36 meses"
+    product_name_1:
+      path: "/slide[5]/shape[@id=8]"
+      type: "multiline_text"
+      find: "BUNDLE RED\nINFINITY PRO"
+    price_1:
+      path: "/slide[5]/shape[@id=10]"
+      type: "text"
+      find: "73,44€/mes"
+    old_price_1:
+      path: "/slide[5]/shape[@id=11]"
+      type: "text"
+      find: "antes: 112,98€/mes"
+    discount_1:
+      path: "/slide[5]/shape[@id=13]"
+      type: "text"
+      find: "35% de descuento"
+    feature_1_1:
+      path: "/slide[5]/shape[@id=15]"
+      type: "text"
+      find: "Datos ilimitados Full Speed"
+    feature_1_2:
+      path: "/slide[5]/shape[@id=17]"
+      type: "text"
+      find: "5G en toda la red Vodafone"
+    feature_1_3:
+      path: "/slide[5]/shape[@id=19]"
+      type: "text"
+      find: "Roaming incluido en UE"
+    product_name_2:
+      path: "/slide[5]/shape[@id=23]"
+      type: "multiline_text"
+      find: "FIBRA\n1 GBPS"
+    price_2:
+      path: "/slide[5]/shape[@id=25]"
+      type: "text"
+      find: "0€/mes"
+    old_price_2:
+      path: "/slide[5]/shape[@id=26]"
+      type: "text"
+      find: "antes: 34,85€/mes"
+    discount_2:
+      path: "/slide[5]/shape[@id=28]"
+      type: "text"
+      find: "100% de descuento"
+    feature_2_1:
+      path: "/slide[5]/shape[@id=30]"
+      type: "text"
+      find: "Conexión simétrica 1 Gbps"
+    feature_2_2:
+      path: "/slide[5]/shape[@id=32]"
+      type: "text"
+      find: "Incluida sin coste adicional"
+    feature_2_3:
+      path: "/slide[5]/shape[@id=34]"
+      type: "text"
+      find: "Instalación y mantenimiento"
+    product_name_3:
+      path: "/slide[5]/shape[@id=38]"
+      type: "multiline_text"
+      find: "CENTRALITA\nPLUS"
+    price_3:
+      path: "/slide[5]/shape[@id=40]"
+      type: "text"
+      find: "0€/mes"
+    old_price_3:
+      path: "/slide[5]/shape[@id=41]"
+      type: "text"
+      find: "antes: 30,75€/mes"
+    discount_3:
+      path: "/slide[5]/shape[@id=43]"
+      type: "text"
+      find: "100% de descuento"
+    feature_3_1:
+      path: "/slide[5]/shape[@id=45]"
+      type: "text"
+      find: "Gestión avanzada de llamadas"
+    feature_3_2:
+      path: "/slide[5]/shape[@id=47]"
+      type: "text"
+      find: "Incluida sin coste adicional"
+    feature_3_3:
+      path: "/slide[5]/shape[@id=49]"
+      type: "text"
+      find: "Multi-sede y extensiones"
+    line_count_badge:
+      path: "/slide[5]/shape[@id=51]"
+      type: "text"
+      find: "25 líneas móviles"
+    network_badge:
+      path: "/slide[5]/shape[@id=53]"
+      type: "text"
+      find: "Red 5G Vodafone"
+    client_type_badge:
+      path: "/slide[5]/shape[@id=55]"
+      type: "text"
+      find: "Cliente Nuevo"
+    economic_support:
+      path: "/slide[5]/shape[@id=61]"
+      type: "text"
+      find: "1.800€"
+
+  slide_6:
+    total_price:
+      path: "/slide[6]/shape[@id=5]"
+      type: "text"
+      find: "305,79 €/mes"
+    summary_line:
+      path: "/slide[6]/shape[@id=6]"
+      type: "text"
+      find: "25 líneas · Terminales a 0€ · Todos con 35% dto · Compromiso 36 meses"
+    subsidy_detail_line:
+      path: "/slide[6]/shape[@id=7]"
+      type: "text"
+      find: "Sub. Vodafone: -160,82€  ·  Sub. Plan Negocio: -956,18€  ·  Apoyo Económico: 1.800€"
+
+  slide_7:
+    terminal_1_name:
+      path: "/slide[7]/shape[@id=7]"
+      type: "text"
+      find: "Adoc NEO 8000 4G"
+    terminal_1_price:
+      path: "/slide[7]/shape[@id=9]"
+      type: "text"
+      find: "PRECIO CESIÓN: 0,00 €"
+    terminal_2_name:
+      path: "/slide[7]/shape[@id=37]"
+      type: "text"
+      find: "Adoc NEO 3850W 4G"
+    terminal_2_price:
+      path: "/slide[7]/shape[@id=39]"
+      type: "text"
+      find: "PRECIO CESIÓN: 0,00 €"
+    terminal_3_name:
+      path: "/slide[7]/shape[@id=67]"
+      type: "text"
+      find: "Cocomm DT250 4G Solo Voz"
+    terminal_3_price:
+      path: "/slide[7]/shape[@id=69]"
+      type: "text"
+      find: "PRECIO CESIÓN: 0,00 €"
+
+  slide_8:
+    client_name_cta:
+      path: "/slide[8]/shape[@id=4]"
+      type: "text"
+      find: "TECNOLOGÍA TÉRMICA SA"

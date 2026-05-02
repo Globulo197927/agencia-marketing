@@ -1,0 +1,166 @@
+brand:
+  name: "Lynks-TIC"
+  primary_color: "45C241"
+  secondary_color: "1A1A1A"
+  accent_color: "FFFFFF"
+  footer_text: "lynks tic  ·  professional network  ·  info@lynks-tic.com  ·  911-08-98-77  ·  lynks-tic.com"
+  template: "templates/lynks-tic_base.pptx"
+
+defaults:
+  extensiones: "165"
+  canales: "165"
+  sedes: "55"
+  terminal_model: "Yealink W73P"
+  terminal_unit_price: "8,50€/ud/mes"
+  ddi_unit_price: "1,50€/ud/mes"
+
+fields:
+  slide_1:
+    client_name_short:
+      path: "/slide[1]/shape[@id=6]"
+      type: "text"
+      find: "DIAVERUM"
+    client_name_suffix:
+      path: "/slide[1]/shape[@id=7]"
+      type: "text"
+      find: "SERVICIOS RENALES SL"
+    meta_line:
+      path: "/slide[1]/shape[@id=9]"
+      type: "text"
+      find: "B84991736  ·  55 sedes  ·  Conectividad FTTO + Voz IP  ·  Marzo 2026"
+
+  slide_2:
+    support_description:
+      path: "/slide[2]/shape[@id=29]"
+      type: "text"
+      find: "Diaverum"
+
+  slide_4:
+    service_subtitle:
+      path: "/slide[4]/shape[@id=5]"
+      type: "text"
+      find: "Diaverum Servicios Renales SL"
+
+  slide_12:
+    terminal_summary_line:
+      path: "/slide[12]/shape[@id=5]"
+      type: "text"
+      find: "165 unidades · 8,50€/ud/mes · Tarifa plana ilimitada a fijos y móviles nacionales"
+
+  slide_13:
+    voz_ip_subtitle:
+      path: "/slide[13]/shape[@id=5]"
+      type: "text"
+      find: "las 55 sedes de Diaverum Servicios Renales SL"
+    extension_count:
+      path: "/slide[13]/shape[@id=9]"
+      type: "text"
+      find: "165"
+    channel_count:
+      path: "/slide[13]/shape[@id=17]"
+      type: "text"
+      find: "165"
+    ddi_count:
+      path: "/slide[13]/shape[@id=25]"
+      type: "text"
+      find: "55"
+    ddi_total_price:
+      path: "/slide[13]/shape[@id=29]"
+      type: "text"
+      find: "82,50€/mes"
+    terminal_count:
+      path: "/slide[13]/shape[@id=41]"
+      type: "text"
+      find: "165"
+    terminal_total_price:
+      path: "/slide[13]/shape[@id=45]"
+      type: "text"
+      find: "1.402,50€/mes"
+
+  slide_14:
+    option_A_title:
+      path: "/slide[14]/shape[@id=4]"
+      type: "text"
+      find: "OPCIÓN A — FTTO 1 GBPS · LA MÁS POTENTE"
+    option_A_total_price:
+      path: "/slide[14]/shape[@id=6]"
+      type: "text"
+      find: "3.795 €/mes"
+    option_A_summary_line:
+      path: "/slide[14]/shape[@id=7]"
+      type: "text"
+      find: "55 sedes · 1Gbps/1Gbps simétrico · Compromiso anual · SLA 99,9%"
+    option_A_speed_details:
+      path: "/slide[14]/shape[@id=8]"
+      type: "text"
+      find: "Descarga 1.000 Mbps · Subida 1.000 Mbps · Latencia <10ms"
+
+  slide_15:
+    option_B_title:
+      path: "/slide[15]/shape[@id=4]"
+      type: "text"
+      find: "OPCIÓN B — FTTO 600 MBPS · LA MÁS EQUILIBRADA"
+    option_B_total_price:
+      path: "/slide[15]/shape[@id=6]"
+      type: "text"
+      find: "3.575 €/mes"
+    option_B_summary_line:
+      path: "/slide[15]/shape[@id=7]"
+      type: "text"
+      find: "55 sedes · 600Mbps/600Mbps simétrico · Compromiso anual · SLA 99,9%"
+    option_B_speed_details:
+      path: "/slide[15]/shape[@id=8]"
+      type: "text"
+      find: "Descarga 600 Mbps · Subida 600 Mbps · Latencia <10ms"
+
+  slide_16:
+    option_A_speed_label:
+      path: "/slide[16]/shape[@id=9]"
+      type: "text"
+      find: "FTTO 1 Gbps simétrico"
+    option_A_total_price:
+      path: "/slide[16]/shape[@id=11]"
+      type: "text"
+      find: "3.795 €/mes"
+    option_A_ftto_line:
+      path: "/slide[16]/shape[@id=13]"
+      type: "text"
+      find: "55 × FTTO 1 Gbps — 2.310€"
+    option_A_ddi_line:
+      path: "/slide[16]/shape[@id=15]"
+      type: "text"
+      find: "55 × DDI — 82,50€"
+    option_A_terminal_line:
+      path: "/slide[16]/shape[@id=17]"
+      type: "text"
+      find: "165 × Yealink W37P — 1.402,50€"
+    option_B_speed_label:
+      path: "/slide[16]/shape[@id=26]"
+      type: "text"
+      find: "FTTO 600 Mbps simétrico"
+    option_B_total_price:
+      path: "/slide[16]/shape[@id=28]"
+      type: "text"
+      find: "3.575 €/mes"
+    option_B_ftto_line:
+      path: "/slide[16]/shape[@id=30]"
+      type: "text"
+      find: "55 × FTTO 600 Mbps — 2.090€"
+    option_B_ddi_line:
+      path: "/slide[16]/shape[@id=32]"
+      type: "text"
+      find: "55 × DDI — 82,50€"
+    option_B_terminal_line:
+      path: "/slide[16]/shape[@id=34]"
+      type: "text"
+      find: "165 × Yealink W37P — 1.402,50€"
+    option_B_savings_line:
+      path: "/slide[16]/shape[@id=37]"
+      type: "text"
+      find: "↓ Ahorro de 2.640€/año respecto a Opción A"
+
+  slide_17:
+    client_name_cta:
+      path: "/slide[17]/shape[@id=5]"
+      type: "text"
+      find: "DIAVERUM SERVICIOS RENALES SL"

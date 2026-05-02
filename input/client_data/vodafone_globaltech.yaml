@@ -1,0 +1,115 @@
+client:
+  name_line1: "EMPRESA"
+  name_line2: "GLOBAL TECH SL"
+  nif: "B87654321"
+  lines: 50
+  type: "Cliente VIP"
+
+proposal:
+  date: "Mayo 2026"
+  duration_months: "24 meses"
+  network_type: "Red 5G Vodafone"
+  include_holidaysim: true
+  include_lynks_tic: true
+  include_roaming: false
+
+products:
+  - name_line1: "TARIFA"
+    name_line2: "ILIMITADA 5G"
+    price_monthly: "9,50€/mes"
+    price_before: "15,00€/mes"
+    discount_text: "37% de descuento"
+    features:
+      - "Datos ilimitados 5G sin límite"
+      - "Llamadas ilimitadas en España y UE"
+      - "Roaming 100 GB incluido"
+
+  - name_line1: "FIBRA"
+    name_line2: "600 MBPS"
+    price_monthly: "0€/mes"
+    price_before: "29,95€/mes"
+    discount_text: "100% de descuento"
+    features:
+      - "Conexión simétrica 600 Mbps"
+      - "Incluida sin coste adicional"
+      - "Instalación gratuita"
+
+  - name_line1: "CENTRALITA"
+    name_line2: "BASIC"
+    price_monthly: "0€/mes"
+    price_before: "22,50€/mes"
+    discount_text: "100% de descuento"
+    features:
+      - "Gestión de llamadas básica"
+      - "Incluida sin coste adicional"
+      - "Extensiones ilimitadas"
+
+economic:
+  total_monthly: "475,00 €/mes"
+  subsidy_vodafone: "-350,00€"
+  subsidy_plan_negocio: "-1.200,00€"
+  apoyo_economico: "3.500€"
+  summary_line: "50 líneas · Terminales a 0€ · Todos con 37% dto · Compromiso 24 meses"
+  subsidy_detail_line: "Sub. Vodafone: -350,00€  ·  Sub. Plan Negocio: -1.200,00€  ·  Apoyo Económico: 3.500€"
+
+terminals:
+  - model: "Samsung Galaxy A55 5G"
+    price: "0,00 €"
+  - model: "Xiaomi Redmi Note 13 5G"
+    price: "0,00 €"
+  - model: "Nokia 2780 Flip"
+    price: "0,00 €"
+
+distribution_table:
+  - terminal: "Samsung Galaxy A55 5G Deals"
+    plan: "RED Infinity PRO Ilim. Bundle"
+    precio_cesion: "187,00€"
+    sin_dto: "0,00€"
+    dto: "37%"
+    con_dto: "0,00€"
+    uds: "1"
+    total: "0,00€"
+  - terminal: "Xiaomi Redmi Note 13 5G Deals"
+    plan: "RED Infinity PRO Ilim. Full Speed"
+    precio_cesion: "365,00€"
+    sin_dto: "17,95€"
+    dto: "37%"
+    con_dto: "11,32€"
+    uds: "25"
+    total: "283,00€"
+  - terminal: "Xiaomi Redmi Note 13 5G Deals"
+    plan: "RED Infinity PRO Ilim. Full Speed"
+    precio_cesion: "365,00€"
+    sin_dto: "17,95€"
+    dto: "37%"
+    con_dto: "11,32€"
+    uds: "20"
+    total: "226,40€"
+  - terminal: "—"
+    plan: "RED Infinity PRO 5Gb"
+    precio_cesion: "0,00€"
+    sin_dto: "13,73€"
+    dto: "37%"
+    con_dto: "8,65€"
+    uds: "2"
+    total: "17,30€"
+  - terminal: "—"
+    plan: "RED Infinity PRO 5Gb"
+    precio_cesion: "0,00€"
+    sin_dto: "13,73€"
+    dto: "37%"
+    con_dto: "8,65€"
+    uds: "1"
+    total: "8,65€"
+  - terminal: "Nokia 2780 Flip 4G Solo Voz"
+    plan: "RED Infinity PRO Solo Voz"
+    precio_cesion: "198,00€"
+    sin_dto: "8,98€"
+    dto: "37%"
+    con_dto: "5,66€"
+    uds: "1"
+    total: "5,66€"
+
+distribution_total:
+  uds: "50 uds"
+  total: "475,00€"
