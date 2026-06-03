@@ -174,7 +174,7 @@ def generate_pptx(brand: str, client_data: dict, output_name: str = None) -> Pat
         raise FileNotFoundError(f"Template not found: {template_path}")
 
     brand_dir = brand.replace("-", "_")
-    if brand_dir not in ("vodafone", "lynks_tic", "lynks_tic_b2mobile"):
+    if brand_dir not in ("vodafone", "lynks_tic", "lynks_tic_b2mobile", "lynks_tic_pro", "lynks_tic_salesianas"):
         brand_dir = "lynks-tic"
     output_dir = BASE_DIR / "output" / brand_dir
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -198,6 +198,8 @@ def generate_pptx(brand: str, client_data: dict, output_name: str = None) -> Pat
         _apply_b2mobile_data(prs, client_data)
     elif brand == "lynks-tic-pro":
         _apply_pro_data(prs, client_data)
+    elif brand == "lynks-tic-salesianas":
+        _apply_salesianas_data(prs, client_data)
     else:
         _apply_lynks_data(prs, client_data)
 
@@ -556,6 +558,87 @@ def _apply_pro_data(prs: Presentation, data: dict):
     mensualidades = total.get("mensualidades", "210,80 €/mes")
     _replace_in_slide(prs, 1, "210,80 €", primer_pago)
     _replace_in_slide(prs, 1, "RESTO MEN...", f"RESTO MENSUALIDADES {mensualidades}")
+
+
+def _apply_salesianas_data(prs: Presentation, data: dict):
+    c = data.get("client", {})
+    p = data.get("proposal", {})
+    eco = data.get("economic", {})
+    comm = data.get("commercial", {})
+    terms = data.get("terminals", [])
+
+    client_short = c.get("name_short", "HIJAS DE MARÍA AUXILIADORA")
+    client_suffix = c.get("name_suffix", "INSTITUTO SALESIANAS CIR")
+    nif = c.get("nif", "R0800057B")
+    lines = c.get("lines", 730)
+    date = p.get("date", "Junio 2026")
+    pack = p.get("pack_name", "B2 Pack Ilimitada")
+    bag = eco.get("apoyo_economico", "8.000€")
+
+    # Slide 1 - Cover
+    _replace_in_slide(prs, 0, "HIJAS DE MARÍA AUXILIADORA", client_short)
+    _replace_in_slide(prs, 0, "INSTITUTO SALESIANAS CIR", client_suffix)
+    _replace_in_slide(prs, 0, "NIF R0800057B", f"NIF {nif}")
+    _replace_in_slide(prs, 0, "730 líneas móviles", f"{lines} líneas móviles")
+    _replace_in_slide(prs, 0, "B2 Pack Ilimitada", pack)
+    _replace_in_slide(prs, 0, "8.000€", bag)
+    _replace_in_slide(prs, 0, "Junio 2026", date)
+
+    # Slide 3 - B2Mobile detail
+    _replace_in_slide(prs, 2, "730", str(lines))
+    _replace_in_slide(prs, 2, "7,50€/línea/mes", p.get("price_per_line", "7,50€/línea/mes"))
+    _replace_in_slide(prs, 2, "9,45€", p.get("catalog_price", "9,45€"))
+    _replace_in_slide(prs, 2, "21% de descuento", p.get("discount_text", "21% de descuento"))
+
+    # Slide 4 - What's included
+    _replace_in_all_shapes(prs, "HIJAS DE MARÍA AUXILIADORA", client_short)
+    _replace_in_all_shapes(prs, "INSTITUTO SALESIANAS CIR", client_suffix)
+    _replace_in_slide(prs, 3, "5.475€/mes", eco.get("total_monthly", "5.475€/mes"))
+    _replace_in_slide(prs, 3, "antes: 6.898,50€/mes", eco.get("price_before", "antes: 6.898,50€/mes"))
+    _replace_in_slide(prs, 3, "21% de descuento", p.get("discount_text", "21% de descuento"))
+    _replace_in_slide(prs, 3, "730 líneas móviles", f"{lines} líneas móviles")
+    _replace_in_slide(prs, 3, "7,50€/línea/mes", p.get("price_per_line", "7,50€/línea/mes"))
+    _replace_in_slide(prs, 3, "8.000€", bag)
+
+    # Slide 5 - Economic detail
+    _replace_in_slide(prs, 4, "5.475 €/mes", eco.get("total_monthly", "5.475 €/mes"))
+    _replace_in_slide(prs, 4, "730 líneas · 7,50€/línea", f"{lines} líneas · {p.get('price_per_line', '7,50€/línea')}")
+    _replace_in_all_shapes(prs, "HIJAS DE MARÍA AUXILIADORA · INSTITUTO SALESIANAS CIR", f"{client_short} · {client_suffix}")
+    _replace_in_slide(prs, 4, "R0800057B", nif)
+    _replace_in_slide(prs, 4, "36 meses", p.get("duration_months", "36 meses"))
+
+    # Table totals
+    total_monthly = eco.get("total_monthly", "5.475,00€")
+    _replace_in_slide(prs, 4, "5.475,00€", total_monthly)
+    _replace_in_slide(prs, 4, "8.000,00€", bag)
+    _replace_in_slide(prs, 4, "730 uds.", f"{lines} uds.")
+
+    # Slide 6 - Connectivity
+    conn = data.get("connectivity", [])
+    ftto_defaults = ["69€/mes", "49€/mes", "34€/mes"]
+    for i, ftto in enumerate(conn[:3]):
+        _replace_in_slide(prs, 5, ftto_defaults[i], ftto.get("price", ftto_defaults[i]))
+
+    # Slide 7 - Cybersecurity
+    cyber = data.get("cybersecurity", {})
+    _replace_in_slide(prs, 6, "70€/mes", cyber.get("pack_price", "70€/mes"))
+    _replace_in_slide(prs, 6, "35€/mes", cyber.get("extra_price", "35€/mes"))
+
+    # Slide 8 - Next steps
+    _replace_in_all_shapes(prs, "HIJAS DE MARÍA AUXILIADORA", client_short)
+    _replace_in_slide(prs, 7, "730 líneas móviles", f"{lines} líneas móviles")
+
+    if comm:
+        _replace_in_slide(prs, 7, "Javier Martín Amador", comm.get("name", "Javier Martín Amador"))
+        _replace_in_slide(prs, 7, "664 25 89 77", comm.get("phone", "664 25 89 77"))
+        _replace_in_slide(prs, 7, "javier.martin@lynks-tic.com", comm.get("email", "javier.martin@lynks-tic.com"))
+
+    # Footer replacements on all slides
+    for i in range(len(prs.slides)):
+        _replace_in_slide(prs, i, "Junio 2026", date)
+        if comm:
+            _replace_in_slide(prs, i, "Javier Martín", comm.get("name", "Javier Martín").split()[0])
+            _replace_in_slide(prs, i, "664 25 89 77", comm.get("phone", "664 25 89 77"))
 
 
 def _handle_optional_slides(prs: Presentation, output_path: Path, client_data: dict, brand: str):

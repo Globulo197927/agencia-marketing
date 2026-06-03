@@ -1,0 +1,37 @@
+client:
+  name_short: "HIJAS DE MARÍA AUXILIADORA"
+  name_suffix: "INSTITUTO SALESIANAS CIR"
+  nif: "R0800057B"
+  lines: 730
+  type: "Cliente Nuevo"
+
+proposal:
+  date: "Junio 2026"
+  duration_months: "36 meses"
+  network_type: "Red 5G Vodafone"
+  pack_name: "B2 Pack Ilimitada"
+  price_per_line: "7,50€/línea/mes"
+  catalog_price: "9,45€"
+  discount_text: "21% de descuento"
+
+economic:
+  total_monthly: "5.475 €/mes"
+  price_before: "antes: 6.898,50€/mes"
+  apoyo_economico: "8.000€"
+
+connectivity:
+  - name: "FTTO 1Gb"
+    price: "69€/mes"
+  - name: "FTTO 600Mb"
+    price: "49€/mes"
+  - name: "FTTO 300Mb"
+    price: "34€/mes"
+
+cybersecurity:
+  pack_price: "70€/mes"
+  extra_price: "35€/mes"
+
+commercial:
+  name: "Javier Martín Amador"
+  phone: "664 25 89 77"
+  email: "javier.martin@lynks-tic.com"

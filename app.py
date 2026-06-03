@@ -19,6 +19,7 @@ EXAMPLES = {
     "lynks-tic": "input/client_data/lynks-tic_acme.yaml",
     "lynks-tic-b2mobile": "input/client_data/lynks-tic_b2mobile_salesianas.yaml",
     "lynks-tic-pro": "input/client_data/lynks-tic-pro_josevicente.yaml",
+    "lynks-tic-salesianas": "input/client_data/lynks-tic-salesianas_ejemplo.yaml",
 }
 
 def load_example(brand):
@@ -41,12 +42,13 @@ if "data" not in st.session_state:
 
 brand = st.selectbox(
     "Marca",
-    ["vodafone", "lynks-tic", "lynks-tic-b2mobile", "lynks-tic-pro"],
+    ["vodafone", "lynks-tic", "lynks-tic-b2mobile", "lynks-tic-pro", "lynks-tic-salesianas"],
     format_func=lambda x: {
         "vodafone": "📱 Vodafone",
         "lynks-tic": "☎️ Lynks-TIC FTTO",
         "lynks-tic-b2mobile": "📲 Lynks-TIC B2Mobile",
         "lynks-tic-pro": "💼 Lynks-TIC Pro",
+        "lynks-tic-salesianas": "📊 Lynks-TIC Salesianas",
     }.get(x, x),
     key="brand_select",
 )
@@ -452,6 +454,84 @@ elif brand == "lynks-tic-pro":
 
     with tab_yaml:
         yaml_text = st.text_area("YAML (editable)", value=data_to_yaml(data), height=500, key="pro_yaml")
+        yaml_data = yaml_to_data(yaml_text)
+        if yaml_data:
+            data = yaml_data
+            st.session_state["data"] = data
+
+# ─── LYNKS-TIC SALESIANAS ───
+elif brand == "lynks-tic-salesianas":
+    st.subheader("2. Datos de la propuesta Salesianas")
+
+    data = copy.deepcopy(st.session_state["data"])
+
+    tab_client, tab_proposal, tab_economic, tab_connectivity, tab_yaml = st.tabs(
+        ["👤 Cliente", "📋 Propuesta", "💰 Económico", "🔌 Conectividad", " YAML"]
+    )
+
+    with tab_client:
+        c = data.setdefault("client", {})
+        c1, c2 = st.columns(2)
+        with c1:
+            c["name_short"] = st.text_input("Nombre", value=c.get("name_short", "HIJAS DE MARÍA AUXILIADORA"), key="sal_ns")
+            c["nif"] = st.text_input("NIF", value=c.get("nif", "R0800057B"), key="sal_nif")
+            c["lines"] = st.number_input("Nº líneas", min_value=1, value=int(c.get("lines", 730)), key="sal_lines")
+        with c2:
+            c["name_suffix"] = st.text_input("Sufijo", value=c.get("name_suffix", "INSTITUTO SALESIANAS CIR"), key="sal_nsu")
+
+        comm = data.setdefault("commercial", {})
+        with st.expander("Comercial", expanded=False):
+            com1, com2, com3 = st.columns(3)
+            with com1:
+                comm["name"] = st.text_input("Nombre", value=comm.get("name", "Javier Martín Amador"), key="sal_cn")
+            with com2:
+                comm["phone"] = st.text_input("Teléfono", value=comm.get("phone", "664 25 89 77"), key="sal_cp")
+            with com3:
+                comm["email"] = st.text_input("Email", value=comm.get("email", "javier.martin@lynks-tic.com"), key="sal_ce")
+
+    with tab_proposal:
+        p = data.setdefault("proposal", {})
+        c1, c2 = st.columns(2)
+        with c1:
+            p["date"] = st.text_input("Fecha", value=p.get("date", "Junio 2026"), key="sal_date")
+            p["duration_months"] = st.text_input("Duración", value=p.get("duration_months", "36 meses"), key="sal_dur")
+            p["pack_name"] = st.text_input("Nombre pack", value=p.get("pack_name", "B2 Pack Ilimitada"), key="sal_pn")
+        with c2:
+            p["price_per_line"] = st.text_input("Precio/línea", value=p.get("price_per_line", "7,50€/línea/mes"), key="sal_ppl")
+            p["catalog_price"] = st.text_input("Precio catálogo", value=p.get("catalog_price", "9,45€"), key="sal_cat")
+            p["discount_text"] = st.text_input("Descuento", value=p.get("discount_text", "21% de descuento"), key="sal_dt")
+
+    with tab_economic:
+        eco = data.setdefault("economic", {})
+        c1, c2 = st.columns(2)
+        with c1:
+            eco["total_monthly"] = st.text_input("Total mensual", value=eco.get("total_monthly", "5.475 €/mes"), key="sal_tm")
+            eco["price_before"] = st.text_input("Precio antes dto", value=eco.get("price_before", "antes: 6.898,50€/mes"), key="sal_pb")
+        with c2:
+            eco["apoyo_economico"] = st.text_input("Apoyo económico", value=eco.get("apoyo_economico", "8.000€"), key="sal_ae")
+
+    with tab_connectivity:
+        conn = data.setdefault("connectivity", [])
+        defaults_conn = [
+            {"name": "FTTO 1Gb", "price": "69€/mes"},
+            {"name": "FTTO 600Mb", "price": "49€/mes"},
+            {"name": "FTTO 300Mb", "price": "34€/mes"},
+        ]
+        while len(conn) < 3:
+            conn.append(defaults_conn[len(conn)])
+        for i, ftto in enumerate(conn[:3]):
+            d = defaults_conn[i]
+            with st.expander(f"FTTO {i+1}", expanded=False):
+                ftto["name"] = st.text_input("Nombre", value=ftto.get("name", d["name"]), key=f"sal_ftto{i}_n")
+                ftto["price"] = st.text_input("Precio", value=ftto.get("price", d["price"]), key=f"sal_ftto{i}_p")
+
+        cyber = data.setdefault("cybersecurity", {})
+        with st.expander("Ciberseguridad", expanded=False):
+            cyber["pack_price"] = st.text_input("Pack inicial", value=cyber.get("pack_price", "70€/mes"), key="sal_cy_pp")
+            cyber["extra_price"] = st.text_input("Sede adicional", value=cyber.get("extra_price", "35€/mes"), key="sal_cy_ep")
+
+    with tab_yaml:
+        yaml_text = st.text_area("YAML (editable)", value=data_to_yaml(data), height=500, key="sal_yaml")
         yaml_data = yaml_to_data(yaml_text)
         if yaml_data:
             data = yaml_data

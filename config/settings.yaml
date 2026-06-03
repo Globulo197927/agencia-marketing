@@ -8,3 +8,4 @@ brand_configs:
   lynks-tic: "config/lynks-tic.yaml"
   lynks-tic-b2mobile: "config/lynks-tic-b2mobile.yaml"
   lynks-tic-pro: "config/lynks-tic-pro.yaml"
+  lynks-tic-salesianas: "config/lynks-tic-salesianas.yaml"

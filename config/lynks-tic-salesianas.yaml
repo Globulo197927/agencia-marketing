@@ -1,0 +1,4 @@
+brand:
+  name: "Lynks-TIC Salesianas"
+  template: "templates/lynks-tic_salesianas_base.pptx"
+  type: "lynks-tic-salesianas"
