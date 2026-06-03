@@ -1,0 +1,59 @@
+client:
+  name_short: "JOSE VICENTE"
+  name_suffix: "SL"
+  nif: "B28927994"
+  lines: 1
+  service_type: "B2ONE B8 Premium + FTTO + Voz IP"
+
+proposal:
+  date: "Mayo 2026"
+  duration_months: 36
+  pack_name: "B2ONE B8 PREMIUM"
+  price_per_line: "149,00€/mes"
+  total_monthly: "210,80 €/mes"
+  total_before: "210,80 €/mes"
+  discount_text: "Sin descuento"
+  catalog_price: "149,00€"
+  bag_terminals: "8 terminales"
+
+connectivity:
+  - name: "FTTO 1Gb + Backup 4G"
+    price: "0€/mes"
+    features:
+      - "Velocidad simétrica 1 Gbps"
+      - "Backup 4G incluido"
+      - "IP fija incluida"
+      - "Instalación y equipamiento incluido"
+    badge: ""
+  - name: "FTTO 600Mb"
+    price: "0€/mes"
+    features:
+      - "Velocidad simétrica 600 Mbps"
+      - "IP fija incluida"
+      - "Ideal para sedes secundarias"
+      - "Instalación incluida"
+  - name: "FTTO 300Mb"
+    price: "0€/mes"
+    features:
+      - "Velocidad simétrica 300 Mbps"
+      - "IP fija incluida"
+      - "Solución económica"
+      - "Para delegaciones pequeñas"
+
+cybersecurity:
+  name: "Forticore"
+  description: "Firewall avanzado · Multi-sede · Gestión centralizada"
+  features:
+    - "Firewall de última generación — Tecnología Fortinet líder del sector"
+    - "Prevención de amenazas — Detección y bloqueo en tiempo real"
+    - "Control de accesos y navegación — Políticas configurables por usuario"
+    - "Multi-sede protegidas — Gestión unificada y baja latencia"
+    - "Informe diario — 3 meses gratis incluidos"
+  pack_price: "70€/mes"
+  pack_sedes: 2
+  extra_price: "35€/mes"
+
+commercial:
+  name: "JAVIER MARTIN AMADOR"
+  phone: "664 258 977"
+  email: "JAVIER.MARTIN@LYNKS-TIC.COM"
