@@ -18,6 +18,7 @@ EXAMPLES = {
     "vodafone": "input/client_data/vodafone_ejemplo.yaml",
     "lynks-tic": "input/client_data/lynks-tic_acme.yaml",
     "lynks-tic-b2mobile": "input/client_data/lynks-tic_b2mobile_salesianas.yaml",
+    "lynks-tic-pro": "input/client_data/lynks-tic-pro_josevicente.yaml",
 }
 
 def load_example(brand):
@@ -40,8 +41,13 @@ if "data" not in st.session_state:
 
 brand = st.selectbox(
     "Marca",
-    ["vodafone", "lynks-tic", "lynks-tic-b2mobile"],
-    format_func=lambda x: "📱 Vodafone" if x == "vodafone" else ("☎️ Lynks-TIC FTTO" if x == "lynks-tic" else "📲 Lynks-TIC B2Mobile"),
+    ["vodafone", "lynks-tic", "lynks-tic-b2mobile", "lynks-tic-pro"],
+    format_func=lambda x: {
+        "vodafone": "📱 Vodafone",
+        "lynks-tic": "☎️ Lynks-TIC FTTO",
+        "lynks-tic-b2mobile": "📲 Lynks-TIC B2Mobile",
+        "lynks-tic-pro": "💼 Lynks-TIC Pro",
+    }.get(x, x),
     key="brand_select",
 )
 
@@ -373,6 +379,79 @@ elif brand == "lynks-tic-b2mobile":
 
     with tab_yaml:
         yaml_text = st.text_area("YAML (editable)", value=data_to_yaml(data), height=500, key="b2_yaml")
+        yaml_data = yaml_to_data(yaml_text)
+        if yaml_data:
+            data = yaml_data
+            st.session_state["data"] = data
+
+# ─── LYNKS-TIC PRO ───
+elif brand == "lynks-tic-pro":
+    st.subheader("2. Datos de la propuesta Pro")
+
+    data = copy.deepcopy(st.session_state["data"])
+
+    tab_client, tab_services, tab_total, tab_yaml = st.tabs(
+        ["👤 Cliente", "📋 Servicios", "💰 Total", " YAML"]
+    )
+
+    with tab_client:
+        c = data.setdefault("client", {})
+        c1, c2 = st.columns(2)
+        with c1:
+            c["name"] = st.text_input("Nombre empresa", value=c.get("name", ""), key="pro_name")
+        with c2:
+            c["nif"] = st.text_input("NIF", value=c.get("nif", ""), key="pro_nif")
+
+        comm = data.setdefault("commercial", {})
+        with st.expander("Comercial", expanded=False):
+            com1, com2, com3 = st.columns(3)
+            with com1:
+                comm["name"] = st.text_input("Nombre", value=comm.get("name", "JAVIER MARTIN AMADOR"), key="pro_cn")
+            with com2:
+                comm["phone"] = st.text_input("Teléfono", value=comm.get("phone", "664258977"), key="pro_cp")
+            with com3:
+                comm["email"] = st.text_input("Email", value=comm.get("email", "JAVIER.MARTIN@LYNKS-TIC.COM"), key="pro_ce")
+
+    with tab_services:
+        svcs = data.setdefault("services", [])
+        defaults = [
+            {"category": "PAQUETES", "type": "", "name": "B2ONE B8 PREMIUM", "commitment": "36 meses", "quantity": "1", "price": "149,00€/mes", "discount": "", "cuota_alta": "", "dto_cuota": "", "total": "149,00 €"},
+            {"category": "", "type": "", "name": "LYNKS FTTO 1GB + BACKUP 4G", "commitment": "36 meses", "quantity": "1", "price": "", "discount": "", "cuota_alta": "", "dto_cuota": "", "total": "0,00 €"},
+            {"category": "", "type": "", "name": "CANAL VOZ (TRUNK)", "commitment": "36 meses", "quantity": "8", "price": "", "discount": "", "cuota_alta": "", "dto_cuota": "", "total": "0,00 €"},
+            {"category": "", "type": "", "name": "EXT IP (IVR,GRABACIÓN,SOFTPHONE)", "commitment": "36 meses", "quantity": "8", "price": "", "discount": "", "cuota_alta": "", "dto_cuota": "", "total": "0,00 €"},
+            {"category": "", "type": "", "name": "DDI (NACIONAL)", "commitment": "36 meses", "quantity": "8", "price": "", "discount": "", "cuota_alta": "", "dto_cuota": "", "total": "0,00 €"},
+            {"category": "", "type": "", "name": "MOVIL B2 ILIMITADA PACK", "commitment": "36 meses", "quantity": "2", "price": "", "discount": "", "cuota_alta": "", "dto_cuota": "", "total": "0,00 €"},
+            {"category": "LYNKS MOBILE", "type": "TARIFAS", "name": "MOVIL B2 ILIMITADA PACK", "commitment": "12 meses", "quantity": "4", "price": "9,45€/mes", "discount": "", "cuota_alta": "", "dto_cuota": "", "total": "37,80 €"},
+            {"category": "LYNKS IP", "type": "EQUIPOS Y TERMINALES", "name": "GIGASET BÁSICO P710", "commitment": "36 meses", "quantity": "8", "price": "3,00€/mes", "discount": "", "cuota_alta": "", "dto_cuota": "", "total": "24,00 €"},
+        ]
+        while len(svcs) < len(defaults):
+            svcs.append(defaults[len(svcs)])
+
+        for i, svc in enumerate(svcs[:len(defaults)]):
+            d = defaults[i]
+            with st.expander(f"Servicio {i+1}: {svc.get('name', d['name'])}", expanded=False):
+                c1, c2, c3 = st.columns(3)
+                with c1:
+                    svc["category"] = st.text_input("Categoría", value=svc.get("category", d["category"]), key=f"pro_s{i}_cat")
+                    svc["name"] = st.text_input("Nombre", value=svc.get("name", d["name"]), key=f"pro_s{i}_name")
+                    svc["commitment"] = st.text_input("Compromiso", value=svc.get("commitment", d["commitment"]), key=f"pro_s{i}_com")
+                with c2:
+                    svc["type"] = st.text_input("Tipo", value=svc.get("type", d["type"]), key=f"pro_s{i}_type")
+                    svc["quantity"] = st.text_input("Cantidad", value=svc.get("quantity", d["quantity"]), key=f"pro_s{i}_qty")
+                    svc["price"] = st.text_input("Precio", value=svc.get("price", d["price"]), key=f"pro_s{i}_price")
+                with c3:
+                    svc["total"] = st.text_input("Total", value=svc.get("total", d["total"]), key=f"pro_s{i}_tot")
+
+    with tab_total:
+        total = data.setdefault("total", {})
+        c1, c2 = st.columns(2)
+        with c1:
+            total["primer_pago"] = st.text_input("Primer pago", value=total.get("primer_pago", "210,80 €"), key="pro_tp")
+        with c2:
+            total["mensualidades"] = st.text_input("Mensualidades", value=total.get("mensualidades", "210,80 €/mes"), key="pro_tm")
+
+    with tab_yaml:
+        yaml_text = st.text_area("YAML (editable)", value=data_to_yaml(data), height=500, key="pro_yaml")
         yaml_data = yaml_to_data(yaml_text)
         if yaml_data:
             data = yaml_data

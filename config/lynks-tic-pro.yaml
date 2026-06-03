@@ -1,0 +1,4 @@
+brand:
+  name: "Lynks-TIC Pro"
+  template: "templates/lynks-tic_pro_base.pptx"
+  type: "lynks-tic-pro"

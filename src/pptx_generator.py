@@ -196,6 +196,8 @@ def generate_pptx(brand: str, client_data: dict, output_name: str = None) -> Pat
         _apply_vodafone_data(prs, client_data)
     elif brand == "lynks-tic-b2mobile":
         _apply_b2mobile_data(prs, client_data)
+    elif brand == "lynks-tic-pro":
+        _apply_pro_data(prs, client_data)
     else:
         _apply_lynks_data(prs, client_data)
 
@@ -483,6 +485,77 @@ def _apply_b2mobile_data(prs: Presentation, data: dict):
         if comm:
             _replace_in_slide(prs, i, "Javier Martín", comm.get("name", "Javier Martín").split()[0])
             _replace_in_slide(prs, i, "664 25 89 77", comm.get("phone", "664 25 89 77"))
+
+
+def _apply_pro_data(prs: Presentation, data: dict):
+    c = data.get("client", {})
+    comm = data.get("commercial", {})
+    svcs = data.get("services", [])
+    total = data.get("total", {})
+
+    client_name = c.get("name", "JOSE VICENTE SL")
+    nif = c.get("nif", "B28927994")
+    full_client = f"{client_name} ({nif})"
+
+    comm_name = comm.get("name", "JAVIER MARTIN AMADOR")
+    comm_phone = comm.get("phone", "664258977")
+    comm_email = comm.get("email", "JAVIER.MARTIN@LYNKS-TIC.COM")
+
+    # Slide 1 — Cover
+    _replace_in_slide(prs, 0, "JOSE VICENTE SL (B28927994)", full_client)
+
+    # Slide 2 — Detail table
+    _replace_in_slide(prs, 1, "JOSE VICENTE SL (B28927994)", full_client)
+    _replace_in_slide(prs, 1, "JAVIER MARTIN AMADOR", comm_name)
+    _replace_in_slide(prs, 1, "664258977", comm_phone)
+    _replace_in_slide(prs, 1, "JAVIER.MARTIN@LYNKS-TIC.COM", comm_email)
+
+    # Replace table rows
+    default_services = [
+        ("PAQUETES", "", "B2ONE B8 PREMIUM", "36 meses", "1", "149,00€/mes", "", "", "", "149,00 €"),
+        ("", "", "LYNKS FTTO 1GB + BACKUP 4G", "36 meses", "1", "", "", "", "", "0,00 €"),
+        ("", "", "CANAL VOZ (TRUNK)", "36 meses", "8", "", "", "", "", "0,00 €"),
+        ("", "", "EXT IP (IVR,GRABACIÓN,SOFTPHONE)", "36 meses", "8", "", "", "", "", "0,00 €"),
+        ("", "", "DDI (NACIONAL)", "36 meses", "8", "", "", "", "", "0,00 €"),
+        ("", "", "MOVIL B2 ILIMITADA PACK", "36 meses", "2", "", "", "", "", "0,00 €"),
+        ("LYNKS MOBILE", "TARIFAS", "MOVIL B2 ILIMITADA PACK", "12 meses", "4", "9,45€/mes", "", "", "", "37,80 €"),
+        ("LYNKS IP", "EQUIPOS Y TERMINALES", "GIGASET BÁSICO P710", "36 meses", "8", "3,00€/mes", "", "", "", "24,00 €"),
+    ]
+
+    services_to_use = svcs if svcs else []
+    while len(services_to_use) < len(default_services):
+        idx = len(services_to_use)
+        services_to_use.append({
+            "category": default_services[idx][0],
+            "type": default_services[idx][1],
+            "name": default_services[idx][2],
+            "commitment": default_services[idx][3],
+            "quantity": default_services[idx][4],
+            "price": default_services[idx][5],
+            "discount": default_services[idx][6],
+            "cuota_alta": default_services[idx][7],
+            "dto_cuota": default_services[idx][8],
+            "total": default_services[idx][9],
+        })
+
+    for i, svc in enumerate(services_to_use[:len(default_services)]):
+        default_row = default_services[i]
+        if svc.get("name") and svc["name"] != default_row[2]:
+            _replace_in_slide(prs, 1, default_row[2], svc["name"])
+        if svc.get("commitment") and svc["commitment"] != default_row[3]:
+            _replace_in_slide(prs, 1, default_row[3], svc["commitment"])
+        if svc.get("quantity") and svc["quantity"] != default_row[4]:
+            _replace_in_slide(prs, 1, default_row[4], svc["quantity"])
+        if svc.get("price") and svc["price"] != default_row[5]:
+            _replace_in_slide(prs, 1, default_row[5], svc["price"])
+        if svc.get("total") and svc["total"] != default_row[9]:
+            _replace_in_slide(prs, 1, default_row[9], svc["total"])
+
+    # Replace totals
+    primer_pago = total.get("primer_pago", "210,80 €")
+    mensualidades = total.get("mensualidades", "210,80 €/mes")
+    _replace_in_slide(prs, 1, "210,80 €", primer_pago)
+    _replace_in_slide(prs, 1, "RESTO MEN...", f"RESTO MENSUALIDADES {mensualidades}")
 
 
 def _handle_optional_slides(prs: Presentation, output_path: Path, client_data: dict, brand: str):
