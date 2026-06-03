@@ -1,0 +1,4 @@
+brand:
+  name: "Lynks-TIC B2Mobile"
+  template: "templates/lynks-tic_b2mobile_base.pptx"
+  type: "lynks-tic-b2mobile"

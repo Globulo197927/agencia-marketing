@@ -17,6 +17,7 @@ st.set_page_config(
 EXAMPLES = {
     "vodafone": "input/client_data/vodafone_ejemplo.yaml",
     "lynks-tic": "input/client_data/lynks-tic_acme.yaml",
+    "lynks-tic-b2mobile": "input/client_data/lynks-tic_b2mobile_salesianas.yaml",
 }
 
 def load_example(brand):
@@ -39,8 +40,8 @@ if "data" not in st.session_state:
 
 brand = st.selectbox(
     "Marca",
-    ["vodafone", "lynks-tic"],
-    format_func=lambda x: "📱 Vodafone" if x == "vodafone" else "☎️ Lynks-TIC",
+    ["vodafone", "lynks-tic", "lynks-tic-b2mobile"],
+    format_func=lambda x: "📱 Vodafone" if x == "vodafone" else ("☎️ Lynks-TIC FTTO" if x == "lynks-tic" else "📲 Lynks-TIC B2Mobile"),
     key="brand_select",
 )
 
@@ -242,7 +243,7 @@ if brand == "vodafone":
             st.session_state["data"] = data
 
 # ─── LYNKS-TIC ───
-else:
+elif brand == "lynks-tic":
     st.subheader("2. Datos del cliente y propuesta (Lynks-TIC)")
 
     tab_client, tab_proposal, tab_options, tab_yaml = st.tabs(
@@ -292,6 +293,86 @@ else:
 
     with tab_yaml:
         yaml_text = st.text_area("YAML (editable)", value=data_to_yaml(data), height=500, key="l_yaml")
+        yaml_data = yaml_to_data(yaml_text)
+        if yaml_data:
+            data = yaml_data
+            st.session_state["data"] = data
+
+# ─── LYNKS-TIC B2MOBILE ───
+elif brand == "lynks-tic-b2mobile":
+    st.subheader("2. Datos de la propuesta B2Mobile")
+
+    data = copy.deepcopy(st.session_state["data"])
+
+    tab_client, tab_proposal, tab_detail, tab_yaml = st.tabs(
+        ["👤 Cliente", "📋 Propuesta", "💰 Detalle económico", " YAML"]
+    )
+
+    with tab_client:
+        c = data.setdefault("client", {})
+        c1, c2 = st.columns(2)
+        with c1:
+            c["name_short"] = st.text_input("Nombre", value=c.get("name_short", ""), key="b2_ns")
+            c["nif"] = st.text_input("NIF", value=c.get("nif", ""), key="b2_nif")
+            c["lines"] = st.number_input("Nº líneas", min_value=1, value=int(c.get("lines", 730)), key="b2_lines")
+        with c2:
+            c["name_suffix"] = st.text_input("Sufijo nombre", value=c.get("name_suffix", ""), key="b2_nsu")
+            c["service_type"] = st.text_input("Tipo servicio", value=c.get("service_type", "Conectividad B2Mobile"), key="b2_svc")
+
+        comm = data.setdefault("commercial", {})
+        with st.expander("Comercial", expanded=False):
+            com1, com2, com3 = st.columns(3)
+            with com1:
+                comm["name"] = st.text_input("Nombre comercial", value=comm.get("name", "Javier Martín Amador"), key="b2_cn")
+            with com2:
+                comm["phone"] = st.text_input("Teléfono", value=comm.get("phone", "664 25 89 77"), key="b2_cp")
+            with com3:
+                comm["email"] = st.text_input("Email", value=comm.get("email", "javier.martin@lynks-tic.com"), key="b2_ce")
+
+    with tab_proposal:
+        p = data.setdefault("proposal", {})
+        c1, c2 = st.columns(2)
+        with c1:
+            p["date"] = st.text_input("Fecha", value=p.get("date", "Junio 2026"), key="b2_date")
+            p["duration_months"] = st.number_input("Permanencia (meses)", value=int(p.get("duration_months", 36)), key="b2_dur")
+            p["pack_name"] = st.text_input("Nombre del pack", value=p.get("pack_name", "B2 Pack Ilimitada"), key="b2_pn")
+        with c2:
+            p["price_per_line"] = st.text_input("Precio/línea/mes", value=p.get("price_per_line", "7,50€/línea/mes"), key="b2_ppl")
+            p["total_monthly"] = st.text_input("Total mensual", value=p.get("total_monthly", "5.475 €/mes"), key="b2_tm")
+            p["discount_text"] = st.text_input("Descuento", value=p.get("discount_text", "21% de descuento"), key="b2_dt")
+        p["catalog_price"] = st.text_input("Precio catálogo/línea", value=p.get("catalog_price", "9,45€"), key="b2_cat")
+        p["total_before"] = st.text_input("Precio antes dto", value=p.get("total_before", "6.898,50€/mes"), key="b2_tb")
+        p["bag_terminals"] = st.text_input("Bolsa terminales", value=p.get("bag_terminals", "8.000€"), key="b2_bag")
+
+    with tab_detail:
+        eco1, eco2, eco3 = st.columns(3)
+        with eco1:
+            p["coverage"] = st.text_input("Cobertura", value=p.get("coverage", "Nacional"), key="b2_cov")
+        with eco2:
+            p["coverage_desc"] = st.text_input("Descripción cobertura", value=p.get("coverage_desc", "cobertura garantizada"), key="b2_cd")
+
+        conn = data.setdefault("connectivity", [])
+        defaults_conn = [
+            {"name": "FTTO 1Gb", "price": "69€/mes", "features": ["Velocidad simétrica", "IP fija incluida", "Backup 4G incluido", "WiFi Business y visitante", "Equipamiento y alta sin coste"]},
+            {"name": "FTTO 600Mb", "price": "49€/mes", "features": ["Velocidad simétrica", "IP fija incluida", "WiFi Business y visitante", "Equipamiento incluido", "Sin cuota de alta"]},
+            {"name": "FTTO 300Mb", "price": "34€/mes", "features": ["Velocidad simétrica", "IP fija incluida", "WiFi Business y visitante", "Equipamiento incluido", "Sin cuota de alta"]},
+        ]
+        while len(conn) < 3:
+            conn.append(defaults_conn[len(conn)])
+        for i, ftto in enumerate(conn[:3]):
+            dconn = defaults_conn[i]
+            with st.expander(f"Conectividad {i+1}: {ftto.get('name', dconn['name'])}", expanded=False):
+                ftto["name"] = st.text_input("Nombre", value=ftto.get("name", dconn["name"]), key=f"b2_ftto{i}_n")
+                ftto["price"] = st.text_input("Precio", value=ftto.get("price", dconn["price"]), key=f"b2_ftto{i}_p")
+
+        cyber = data.setdefault("cybersecurity", {})
+        with st.expander("Ciberseguridad", expanded=False):
+            cyber["pack_price"] = st.text_input("Pack inicial", value=cyber.get("pack_price", "70€/mes"), key="b2_cy_pp")
+            cyber["pack_sedes"] = st.number_input("Sedes pack", value=int(cyber.get("pack_sedes", 2)), key="b2_cy_ps")
+            cyber["extra_price"] = st.text_input("Sede adicional", value=cyber.get("extra_price", "35€/mes"), key="b2_cy_ep")
+
+    with tab_yaml:
+        yaml_text = st.text_area("YAML (editable)", value=data_to_yaml(data), height=500, key="b2_yaml")
         yaml_data = yaml_to_data(yaml_text)
         if yaml_data:
             data = yaml_data

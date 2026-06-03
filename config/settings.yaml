@@ -6,3 +6,4 @@ defaults:
 brand_configs:
   vodafone: "config/vodafone.yaml"
   lynks-tic: "config/lynks-tic.yaml"
+  lynks-tic-b2mobile: "config/lynks-tic-b2mobile.yaml"

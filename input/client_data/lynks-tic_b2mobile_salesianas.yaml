@@ -1,0 +1,63 @@
+client:
+  name_short: "HIJAS DE MARÍA AUXILIADORA"
+  name_suffix: "INSTITUTO SALESIANAS CIR"
+  nif: "R0800057B"
+  lines: 730
+  service_type: "Conectividad B2Mobile"
+
+proposal:
+  date: "Junio 2026"
+  duration_months: 36
+  pack_name: "B2 Pack Ilimitada"
+  price_per_line: "7,50€/línea/mes"
+  total_monthly: "5.475 €/mes"
+  total_before: "6.898,50€/mes"
+  discount_text: "21% de descuento"
+  catalog_price: "9,45€"
+  coverage: "Nacional"
+  bag_terminals: "8.000€"
+
+connectivity:
+  - name: "FTTO 1Gb"
+    price: "69€/mes"
+    features:
+      - "Velocidad simétrica"
+      - "IP fija incluida"
+      - "Backup 4G incluido"
+      - "WiFi Business y visitante"
+      - "Equipamiento y alta sin coste"
+    badge: "RECOMENDADO"
+  - name: "FTTO 600Mb"
+    price: "49€/mes"
+    features:
+      - "Velocidad simétrica"
+      - "IP fija incluida"
+      - "WiFi Business y visitante"
+      - "Equipamiento incluido"
+      - "Sin cuota de alta"
+  - name: "FTTO 300Mb"
+    price: "34€/mes"
+    features:
+      - "Velocidad simétrica"
+      - "IP fija incluida"
+      - "WiFi Business y visitante"
+      - "Equipamiento incluido"
+      - "Sin cuota de alta"
+
+cybersecurity:
+  name: "Forticore"
+  description: "Firewall avanzado · Multi-sede · Gestión centralizada"
+  features:
+    - "Firewall de última generación — Tecnología Fortinet líder del sector"
+    - "Prevención de amenazas — Detección y bloqueo en tiempo real"
+    - "Control de accesos y navegación — Políticas configurables por usuario"
+    - "Multi-sede protegidas — Gestión unificada y baja latencia"
+    - "Informe diario — 3 meses gratis incluidos"
+  pack_price: "70€/mes"
+  pack_sedes: 2
+  extra_price: "35€/mes"
+
+commercial:
+  name: "Javier Martín Amador"
+  phone: "664 25 89 77"
+  email: "javier.martin@lynks-tic.com"
